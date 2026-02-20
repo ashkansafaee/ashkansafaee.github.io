@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ashkan Safaee</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #0e0e0e;
+      --surface:  #161616;
+      --border:   #2a2a2a;
+      --text:     #e8e2d9;
+      --muted:    #6b6560;
+      --accent:   #c9a96e;
+      --accent2:  #7a9e8e;
+      --serif:    'Cormorant Garamond', Georgia, serif;
+      --mono:     'DM Mono', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--serif);
+      font-size: 18px;
+      line-height: 1.7;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── Grain overlay ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 1000;
+      opacity: 0.4;
+    }
+
+    /* ── Layout ── */
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* ── Header ── */
+    header {
+      padding: 5rem 0 3rem;
+      animation: fadeUp 0.9s ease both;
+    }
+
+    .eyebrow {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+    }
+
+    h1 {
+      font-family: var(--serif);
+      font-size: clamp(3rem, 8vw, 5.5rem);
+      font-weight: 300;
+      letter-spacing: -0.02em;
+      line-height: 1.0;
+      color: var(--text);
+    }
+
+    h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .tagline {
+      margin-top: 1.8rem;
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: var(--muted);
+      max-width: 480px;
+      line-height: 1.8;
+    }
+
+    /* ── Divider ── */
+    .rule {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 3rem 0;
+      animation: fadeUp 0.9s 0.2s ease both;
+    }
+
+    /* ── Sections ── */
+    section {
+      margin-bottom: 3.5rem;
+      animation: fadeUp 0.9s ease both;
+    }
+
+    section:nth-child(2) { animation-delay: 0.15s; }
+    section:nth-child(3) { animation-delay: 0.25s; }
+    section:nth-child(4) { animation-delay: 0.35s; }
+    section:nth-child(5) { animation-delay: 0.45s; }
+
+    .section-label {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+    }
+
+    /* ── About ── */
+    .about p {
+      font-size: 1.08rem;
+      font-weight: 300;
+      color: #c8c0b5;
+      line-height: 1.85;
+    }
+
+    .about p + p { margin-top: 1rem; }
+
+    /* ── Stats row ── */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin: 2.5rem 0;
+    }
+
+    .stat {
+      background: var(--surface);
+      padding: 1.4rem 1.2rem;
+      text-align: center;
+    }
+
+    .stat-number {
+      font-family: var(--serif);
+      font-size: 2.2rem;
+      font-weight: 300;
+      color: var(--accent);
+      line-height: 1;
+      display: block;
+    }
+
+    .stat-label {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-top: 0.4rem;
+      display: block;
+    }
+
+    /* ── Projects ── */
+    .projects { display: flex; flex-direction: column; gap: 1px; }
+
+    .project {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 1.4rem 1.6rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      text-decoration: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .project:hover {
+      border-color: var(--accent);
+      background: #1a1a1a;
+    }
+
+    .project-title {
+      font-family: var(--serif);
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--text);
+    }
+
+    .project-desc {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--muted);
+      margin-top: 0.3rem;
+      line-height: 1.5;
+    }
+
+    .project-arrow {
+      color: var(--accent);
+      font-size: 1rem;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+      transition: transform 0.2s;
+    }
+
+    .project:hover .project-arrow { transform: translate(3px, -3px); }
+
+    /* ── Links ── */
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+    }
+
+    .link-btn {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text);
+      text-decoration: none;
+      border: 1px solid var(--border);
+      padding: 0.6rem 1.2rem;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .link-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .link-btn.primary {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .link-btn.primary:hover {
+      background: var(--accent);
+      color: var(--bg);
+    }
+
+    /* ── Footer ── */
+    footer {
+      padding: 2.5rem 0 4rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      animation: fadeUp 0.9s 0.5s ease both;
+    }
+
+    .footer-name {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    .footer-location {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+    }
+
+    /* ── Animation ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Mobile ── */
+    @media (max-width: 560px) {
+      .stats { grid-template-columns: 1fr 1fr; }
+      .stats .stat:last-child { grid-column: span 2; }
+      footer { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- Header -->
+  <header>
+    <p class="eyebrow">Stockholm, Sweden</p>
+    <h1>Ashkan<br><em>Safaee</em></h1>
+    <p class="tagline">Senior operator and 3× founder building at the intersection of execution, organisation, and statistical thinking.</p>
+  </header>
+
+  <hr class="rule" />
+
+  <!-- About -->
+  <section class="about">
+    <p class="section-label">About</p>
+    <p>Two decades running organisations — from zero-to-one startups to 2B SEK commercial portfolios. My work has consistently been about building structures that let teams move fast without losing control.</p>
+    <p>Currently completing a B.Sc. in Mathematical Statistics and Machine Learning at Stockholm University, with 30 ECTS completed at Master's level concurrently. The projects below are the output of that.</p>
+  </section>
+
+  <!-- Stats -->
+  <div class="stats" style="animation: fadeUp 0.9s 0.2s ease both;">
+    <div class="stat">
+      <span class="stat-number">3×</span>
+      <span class="stat-label">Founder</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">2B</span>
+      <span class="stat-label">SEK managed</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">150+</span>
+      <span class="stat-label">People led</span>
+    </div>
+  </div>
+
+  <!-- Projects -->
+  <section>
+    <p class="section-label">Selected Projects</p>
+    <div class="projects">
+
+      <a class="project" href="https://github.com/ashsafaee/swedish-equity-modelling" target="_blank" rel="noopener">
+        <div>
+          <div class="project-title">Swedish Equity Market Prediction</div>
+          <div class="project-desc">Ridge · LASSO · Stepwise AIC · Logistic Regression · OMX index</div>
+        </div>
+        <span class="project-arrow">↗</span>
+      </a>
+
+      <a class="project" href="https://github.com/ashsafaee/deep-learning-forest-classification" target="_blank" rel="noopener">
+        <div>
+          <div class="project-title">Deep Learning — Forest Cover Classification</div>
+          <div class="project-desc">12-layer MLP · 581K samples · Class imbalance · 94.07% accuracy</div>
+        </div>
+        <span class="project-arrow">↗</span>
+      </a>
+
+      <a class="project" href="https://github.com/ashsafaee/spam-classification-study" target="_blank" rel="noopener">
+        <div>
+          <div class="project-title">Spam Classification — GBT vs SVM</div>
+          <div class="project-desc">Gradient Boosting · Support Vector Machines · 1-SE model selection</div>
+        </div>
+        <span class="project-arrow">↗</span>
+      </a>
+
+      <a class="project" href="https://github.com/ashsafaee/rate-distortion-clustering" target="_blank" rel="noopener">
+        <div>
+          <div class="project-title">Rate-Distortion Clustering</div>
+          <div class="project-desc">Blahut-Arimoto · Information Theory · Soft clustering from scratch</div>
+        </div>
+        <span class="project-arrow">↗</span>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- Links -->
+  <section>
+    <p class="section-label">Connect</p>
+    <div class="links">
+      <a class="link-btn primary" href="mailto:ashkansafaee@gmail.com">Email</a>
+      <a class="link-btn" href="https://www.linkedin.com/in/ashsafaee" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="link-btn" href="https://github.com/ashsafaee" target="_blank" rel="noopener">GitHub</a>
+      <a class="link-btn" href="https://about.me/ashkan_safaee" target="_blank" rel="noopener">About.me</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <span class="footer-name">Ashkan Safaee</span>
+    <span class="footer-location">Stockholm · 2026</span>
+  </footer>
+
+</div>
+
+</body>
+</html>
