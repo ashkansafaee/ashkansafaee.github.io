@@ -109,6 +109,7 @@
     section:nth-child(3) { animation-delay: 0.25s; }
     section:nth-child(4) { animation-delay: 0.35s; }
     section:nth-child(5) { animation-delay: 0.45s; }
+    section:nth-child(6) { animation-delay: 0.55s; }
 
     .section-label {
       font-family: var(--mono);
@@ -209,6 +210,47 @@
 
     .project:hover .project-arrow { transform: translate(3px, -3px); }
 
+    /* ── Thesis card (featured variant) ── */
+    .thesis-card {
+      background: var(--surface);
+      border: 1px solid var(--accent);
+      padding: 1.8rem 1.6rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .thesis-card:hover { background: #1a1a1a; }
+
+    .thesis-title {
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      font-weight: 400;
+      color: var(--text);
+      line-height: 1.4;
+    }
+
+    .thesis-meta {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.05em;
+      color: var(--accent);
+      margin-top: 0.5rem;
+    }
+
+    .thesis-desc {
+      font-family: var(--serif);
+      font-size: 0.92rem;
+      font-weight: 300;
+      color: #b8b0a5;
+      margin-top: 0.9rem;
+      line-height: 1.75;
+      max-width: 560px;
+    }
+
     /* ── Links ── */
     .links {
       display: flex;
@@ -301,7 +343,7 @@
   <section class="about">
     <p class="section-label">About</p>
     <p>Two decades running organisations — from zero-to-one startups to 2B SEK commercial portfolios. My work has consistently been about building structures that let teams move fast without losing control.</p>
-    <p>Completed a B.Sc. in Mathematical Statistics and Machine Learning at Stockholm University, with 30 ECTS completed at Master's level concurrently. The projects below are the output of that.</p>
+    <p>Completed a B.Sc. in Mathematical Statistics and Machine Learning at Stockholm University, with 30 ECTS completed at Master's level concurrently. The thesis and projects below are the output of that.</p>
   </section>
 
   <!-- Stats -->
@@ -319,6 +361,19 @@
       <span class="stat-label">People led</span>
     </div>
   </div>
+
+  <!-- Thesis -->
+  <section>
+    <p class="section-label">Thesis</p>
+    <a class="thesis-card" href="https://github.com/ashkansafaee/ashsafaee/blob/main/thesis/Grokking_through_the_lens_of_information_theory.pdf" target="_blank" rel="noopener">
+      <div>
+        <div class="thesis-title">Grokking through the Lens of Information Theory</div>
+        <div class="thesis-meta">B.SC. THESIS · GRADE A · SUPERVISED BY OLA HÖSSJER &amp; LEO LEVENIUS</div>
+        <div class="thesis-desc">Why do neural networks sometimes keep getting better long after they've already mastered the training data — as if something suddenly clicks into place? This thesis connects two information-theoretic frameworks (Tishby's information bottleneck and Clauw et al.'s synergy/redundancy decomposition) to argue that "grokking" is what compression looks like from the inside: a network shedding memorised noise in favour of a generalising, compressed representation — with weight decay as the mechanism that pushes it there.</div>
+      </div>
+      <span class="project-arrow">↗</span>
+    </a>
+  </section>
 
   <!-- Projects -->
   <section>
